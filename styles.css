@@ -314,6 +314,21 @@ section {
   box-shadow: 0 2px 8px rgba(66, 61, 55, 0.1);
 }
 
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  animation: breathe 2s var(--ease-smooth) infinite;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
 .btn-secondary {
   background: transparent;
   color: var(--espresso);
@@ -1640,7 +1655,11 @@ section {
   }
 
   .phone-secondary {
-    display: none;
+    display: block;
+    width: 160px;
+    height: 320px;
+    right: -40px;
+    top: 30px;
   }
 
   .reflections-grid,
@@ -1731,6 +1750,13 @@ section {
   .phone-screen {
     padding: 24px 12px 12px;
     gap: 12px;
+  }
+
+  .phone-secondary {
+    width: 140px;
+    height: 280px;
+    right: -30px;
+    top: 25px;
   }
 
   .steps-grid {
