@@ -166,9 +166,17 @@ form.addEventListener('submit', (e) => {
     return;
   }
 
-  // If using a real backend service, submit the form
-  // Otherwise, show success message
+  // Show success message
   showSuccessMessage();
+
+  // Submit to Formspree
+  fetch(form.action, {
+    method: 'POST',
+    body: new FormData(form),
+    headers: {
+      'Accept': 'application/json'
+    }
+  }).catch(error => console.error('Form submission error:', error));
 });
 
 function showSuccessMessage() {
