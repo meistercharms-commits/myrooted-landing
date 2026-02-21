@@ -174,22 +174,34 @@ form.addEventListener('submit', (e) => {
   submitBtn.disabled = true;
   submitBtn.textContent = 'Adding...';
 
-  // Submit the form to Formspree
+  // Submit to Formspree via fetch (no page redirect)
   setTimeout(() => {
-    form.submit();
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(() => {
+      // Show brief success message
+      showSuccessMessage();
 
-    // Show brief success message
-    showSuccessMessage();
-
-    // Reset form and re-enable button after success
-    setTimeout(() => {
-      form.reset();
+      // Reset form and re-enable button after success
+      setTimeout(() => {
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        emailInput.focus();
+        formSuccess.classList.remove('visible');
+        formSuccess.setAttribute('aria-hidden', 'true');
+      }, 1500);
+    })
+    .catch(error => {
+      console.error('Form submission error:', error);
       submitBtn.disabled = false;
       submitBtn.textContent = originalText;
-      emailInput.focus();
-      formSuccess.classList.remove('visible');
-      formSuccess.setAttribute('aria-hidden', 'true');
-    }, 1500);
+    });
   }, 100);
 });
 
