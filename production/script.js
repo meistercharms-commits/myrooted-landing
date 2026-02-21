@@ -166,28 +166,53 @@ form.addEventListener('submit', (e) => {
     return;
   }
 
-  // If using a real backend service, submit the form
-  // Otherwise, show success message
-  showSuccessMessage();
+  // Get the submit button
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+
+  // Show loading state
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Adding...';
+
+  // Submit to Formspree via fetch (no page redirect)
+  setTimeout(() => {
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+    .then(() => {
+      // Show brief success message
+      showSuccessMessage();
+
+      // Reset form and re-enable button after success
+      setTimeout(() => {
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        emailInput.focus();
+        formSuccess.classList.remove('visible');
+        formSuccess.setAttribute('aria-hidden', 'true');
+      }, 1500);
+    })
+    .catch(error => {
+      console.error('Form submission error:', error);
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+    });
+  }, 100);
 });
 
 function showSuccessMessage() {
-  // Hide form
-  form.classList.add('submitted');
-
   // Show success message with animation
   formSuccess.classList.add('visible');
   formSuccess.setAttribute('aria-hidden', 'false');
-
-  // Reset form for next potential submission
-  form.reset();
-
-  // Optional: Reset form after delay to allow users to see message
-  setTimeout(() => {
-    form.classList.remove('submitted');
-    formSuccess.classList.remove('visible');
-    formSuccess.setAttribute('aria-hidden', 'true');
-  }, 4000);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════ */
