@@ -176,10 +176,14 @@ form.addEventListener('submit', (e) => {
 
   // Submit to Formspree via fetch (no page redirect)
   setTimeout(() => {
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+
     fetch(form.action, {
       method: 'POST',
-      body: new FormData(form),
+      body: JSON.stringify(data),
       headers: {
+        'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
     })
