@@ -1482,9 +1482,9 @@ section {
 
 .footer-brand {
   display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-  align-items: flex-start;
+  flex-direction: row;
+  gap: var(--spacing-md);
+  align-items: center;
 }
 
 .footer-logo {
@@ -1851,6 +1851,10 @@ section {
 
   .terms-content ul {
     margin-left: var(--spacing-lg);
+  }
+
+  .footer-brand {
+    flex-direction: column;
   }
 }
 
