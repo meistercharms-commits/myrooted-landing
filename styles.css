@@ -181,6 +181,16 @@ section {
   text-decoration: none;
   letter-spacing: 0.04em;
   z-index: 10;
+  display: inline-block;
+}
+
+.nav-logo img {
+  display: block;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-menu {
@@ -442,6 +452,15 @@ section {
   color: var(--sienna);
   display: block;
   margin-bottom: var(--spacing-lg);
+}
+
+.hero-label img {
+  display: block;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  margin: 0 auto var(--spacing-lg);
+  padding: 0;
 }
 
 .hero-headline {
@@ -1474,6 +1493,16 @@ section {
   text-decoration: none;
   transition: color 0.2s;
   font-weight: 400;
+  display: inline-block;
+}
+
+.footer-logo img {
+  display: block;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
 }
 
 .footer-logo:hover,
