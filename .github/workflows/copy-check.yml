@@ -1,0 +1,14 @@
+name: copy gate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  copy-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run the copy gate
+        run: python3 scripts/check_copy.py
